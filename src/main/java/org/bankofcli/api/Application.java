@@ -7,4 +7,12 @@ public class Application {
 
         return "$100.00";
     }
+
+    public String transfer() {
+        //!TODO Read sender and receiver accounts
+        //!TODO Read transfer amount
+        //!TODO Transfer money between accounts
+
+        return "transfer successful";
+    }
 }
