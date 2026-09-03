@@ -1,9 +1,13 @@
 package org.bankofcli;
 
+import org.bankofcli.api.Application;
+
 import java.util.Scanner;
 
 public class BankApplication {
     public static void main(String[] args) {
+        Application app = new Application();
+
         Scanner scanner = new Scanner(System.in);
 
         boolean open = true;
@@ -38,7 +42,8 @@ public class BankApplication {
 
                 case "3":
                     System.out.println("Check Balance selected");
-                    open = returnOrExit(scanner);
+                    System.out.println(app.balance());
+                    //open = returnOrExit(scanner);
                     break;
 
                 case "4":
