@@ -1,5 +1,7 @@
 package org.bankofcli.api;
 
+import java.util.Scanner;
+
 public class Application {
     public String balance() {
         //!TODO Read from database current balance
@@ -8,10 +10,17 @@ public class Application {
         return "$100.00";
     }
 
-    public String Deposit(double deposit){
+    public String Deposit(){
         //!TODO Read from database current balance
-        //!ToDo take balance and add deposit
+        double balance = 100; //this shouldn't be hard coded in future
 
-        return "deposit of $" + deposit + " successful, new balance: " + balance();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("how much do you want to deposit?");
+
+        double deposit = scanner.nextDouble();
+
+        balance += deposit;
+
+        return "deposit of $" + deposit + " successful, new balance: " + balance;
     }
 }
