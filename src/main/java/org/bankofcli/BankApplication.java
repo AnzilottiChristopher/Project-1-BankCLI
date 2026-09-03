@@ -11,57 +11,93 @@ public class BankApplication {
         Scanner scanner = new Scanner(System.in);
 
         boolean open = true;
+        boolean loggedIn = false;
+
+        System.out.println("If you have an existing account please login using your Account ID " +
+                "and PIN.");
+        System.out.println("If you are a new user, please register.");
 
         while (open) {
             System.out.println("Welcome to the Bank Of CLI!");
-            System.out.println("If you have an existing account please login using your Account ID " +
-                    "and PIN.");
-            System.out.println("If you are a new user, please register.");
-            System.out.println("1. Register");
-            System.out.println("2. Login");
-            System.out.println("3. Check Balance");
-            System.out.println("4. Deposit");
-            System.out.println("5. Withdraw");
-            System.out.println("6. Transfer");
-            System.out.println("7. Transaction History");
-            System.out.println("8. Exit");
+            if (loggedIn) {
+                System.out.println("3. Check Balance");
+                System.out.println("4. Deposit");
+                System.out.println("5. Withdraw");
+                System.out.println("6. Transfer");
+                System.out.println("7. Transaction History");
+                System.out.println("8. Exit");
+            } else {
+                System.out.println("1. Register");
+                System.out.println("2. Login");
+                System.out.println("8. Exit");
+            }
             System.out.print("Enter choice: ");
 
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
+                    if (loggedIn) {
+                        System.out.println("Invalid option. Please choose 3-8.");
+                        break;
+                    }
                     System.out.println("Register selected");
+                    loggedIn = true;
                     open = returnOrExit(scanner);
                     break;
 
                 case "2":
+                    if (loggedIn) {
+                        System.out.println("Invalid option. Please choose 3-8.");
+                        break;
+                    }
                     System.out.println("Login selected");
+                    loggedIn = true;
                     open = returnOrExit(scanner);
                     break;
 
                 case "3":
+                    if (!loggedIn) {
+                        System.out.println("Please register or log in first.");
+                        break;
+                    }
                     System.out.println("Check Balance selected");
                     System.out.println(app.balance());
                     //open = returnOrExit(scanner);
                     break;
 
                 case "4":
+                    if (!loggedIn) {
+                        System.out.println("Please register or log in first.");
+                        break;
+                    }
                     System.out.println("Deposit selected");
                     open = returnOrExit(scanner);
                     break;
 
                 case "5":
+                    if (!loggedIn) {
+                        System.out.println("Please register or log in first.");
+                        break;
+                    }
                     System.out.println("Withdraw selected");
                     open = returnOrExit(scanner);
                     break;
 
                 case "6":
+                    if (!loggedIn) {
+                        System.out.println("Please register or log in first.");
+                        break;
+                    }
                     System.out.println("Transfer selected");
                     open = returnOrExit(scanner);
                     break;
 
                 case "7":
+                    if (!loggedIn) {
+                        System.out.println("Please register or log in first.");
+                        break;
+                    }
                     System.out.println("Transaction History selected");
                     open = returnOrExit(scanner);
                     break;
@@ -72,7 +108,11 @@ public class BankApplication {
                     break;
 
                 default:
-                    System.out.println("Invalid option. Please choose 1-8.");
+                    if (loggedIn) {
+                        System.out.println("Invalid option. Please choose 3-8.");
+                    } else {
+                        System.out.println("Invalid option. Please choose 1, 2, or 8.");
+                    }
             }
         }
 
