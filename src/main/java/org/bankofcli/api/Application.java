@@ -5,6 +5,6 @@ public class Application {
         //!TODO Read from database current balance
         //!TODO then return balance
 
-        return "$100.00";
+        return "Your Balance is: $100.00";
     }
 }

@@ -43,7 +43,7 @@ public class BankApplication {
                 case "3":
                     System.out.println("Check Balance selected");
                     System.out.println(app.balance());
-                    open = returnOrExit(scanner);
+                    //open = returnOrExit(scanner);
                     break;
 
                 case "4":
