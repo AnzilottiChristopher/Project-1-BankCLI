@@ -5,6 +5,14 @@ public class Application {
         //!TODO Read from database current balance
         //!TODO then return balance
 
-        return "$100.00";
+        return "Your Balance is: $100.00";
+    }
+
+    public String transfer() {
+        //!TODO Read sender and receiver accounts
+        //!TODO Read transfer amount
+        //!TODO Transfer money between accounts
+
+        return "transfer successful";
     }
 }
