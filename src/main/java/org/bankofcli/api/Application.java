@@ -7,4 +7,11 @@ public class Application {
 
         return "$100.00";
     }
+
+    public String Deposit(double deposit){
+        //!TODO Read from database current balance
+        //!ToDo take balance and add deposit
+
+        return "deposit of $" + deposit + " successful, new balance: " + balance();
+    }
 }
