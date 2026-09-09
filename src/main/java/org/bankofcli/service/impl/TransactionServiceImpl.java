@@ -18,13 +18,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void deposit(String accountId, BigDecimal amount) {
-        // Deposit is handled by Xavier
         throw new UnsupportedOperationException("Deposit is not implemented yet");
     }
 
     @Override
     public void withdraw(String accountId, BigDecimal amount) {
-        // Withdraw is handled by Chandra
         throw new UnsupportedOperationException("Withdraw is not implemented yet");
     }
 
@@ -58,9 +56,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> getRecentTransactions(String accountId) {
-        // Transaction history is handled by another team member
         throw new UnsupportedOperationException(
                 "Transaction history is not implemented yet");
     }
 }
-
