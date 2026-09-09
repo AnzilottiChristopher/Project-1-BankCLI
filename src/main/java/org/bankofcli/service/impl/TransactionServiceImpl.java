@@ -2,6 +2,7 @@ package org.bankofcli.service.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 import org.bankofcli.model.Transaction;
 import org.bankofcli.repository.TransactionRepository;
@@ -12,7 +13,7 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository transactionRepository;
 
     public TransactionServiceImpl(TransactionRepository transactionRepository) {
-        this.transactionRepository = transactionRepository;
+        this.transactionRepository = Objects.requireNonNull(transactionRepository);
     }
 
     @Override
@@ -62,4 +63,3 @@ public class TransactionServiceImpl implements TransactionService {
                 "Transaction history is not implemented yet");
     }
 }
-
