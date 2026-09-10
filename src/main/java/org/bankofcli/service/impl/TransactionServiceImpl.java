@@ -47,7 +47,7 @@ public class TransactionServiceImpl implements TransactionService {
                     "Source and destination accounts must be different.");
         }
 
-        transactions.transfer(
+        transaction.transfer(
                 sourceAccountId,
                 destinationAccountId,
                 amount
