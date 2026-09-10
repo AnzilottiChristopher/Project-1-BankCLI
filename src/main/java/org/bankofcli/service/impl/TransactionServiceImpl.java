@@ -31,32 +31,35 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void withdraw(String accountId, BigDecimal amount) {
-        amount = BankingRules.amount(amount);
-        requireFunds(accountId, amount);
-        transactions.withdraw(accountId, amount);
-        log.info("Withdrawal succeeded");
+        throw new UnsupportedOperationException("Withdraw is not implemented yet");
     }
 
     @Override
-    public void transfer(String sourceAccountId, String destinationAccountId, BigDecimal amount) {
-        amount = BankingRules.amount(amount);
-        BankingRules.existingAccount(accounts, sourceAccountId);
-        BankingRules.existingAccount(accounts, destinationAccountId);
-        if (sourceAccountId.equals(destinationAccountId)) {
-            throw new BankingException("Cannot transfer to the same account.");
-        }
-        requireFunds(sourceAccountId, amount);
-        // The repository must update both balances and history atomically.
-        transactions.transfer(sourceAccountId, destinationAccountId, amount);
-        log.info("Transfer succeeded");
-    }
+    public void transfer(String sourceAccountId,
+                         String destinationAccountId,
+                         BigDecimal amount) {
 
-    private void requireFunds(String accountId, BigDecimal amount) {
-        BankingRules.existingAccount(accounts, accountId);
-        if (accounts.getBalance(accountId).compareTo(amount) < 0) {
-            log.warn("Transaction rejected: insufficient funds");
-            throw new BankingException("Insufficient funds.");
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException(
+                    "Transfer amount must be greater than zero.");
         }
+
+        if (sourceAccountId == null || destinationAccountId == null ||
+                sourceAccountId.isBlank() || destinationAccountId.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Account IDs cannot be empty.");
+        }
+
+        if (sourceAccountId.equals(destinationAccountId)) {
+            throw new IllegalArgumentException(
+                    "Source and destination accounts must be different.");
+        }
+
+        transactionRepository.transfer(
+                sourceAccountId,
+                destinationAccountId,
+                amount
+        );
     }
 
     @Override
