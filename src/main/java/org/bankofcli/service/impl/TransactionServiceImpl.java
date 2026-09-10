@@ -3,22 +3,30 @@ package org.bankofcli.service.impl;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
-
 import org.bankofcli.model.Transaction;
+import org.bankofcli.repository.AccountRepository;
 import org.bankofcli.repository.TransactionRepository;
+import org.bankofcli.service.BankingException;
 import org.bankofcli.service.TransactionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TransactionServiceImpl implements TransactionService {
+    private static final Logger log = LoggerFactory.getLogger(TransactionServiceImpl.class);
+    private final AccountRepository accounts;
+    private final TransactionRepository transactions;
 
-    private final TransactionRepository transactionRepository;
-
-    public TransactionServiceImpl(TransactionRepository transactionRepository) {
-        this.transactionRepository = Objects.requireNonNull(transactionRepository);
+    public TransactionServiceImpl(AccountRepository accounts, TransactionRepository transactions) {
+        this.accounts = Objects.requireNonNull(accounts);
+        this.transactions = Objects.requireNonNull(transactions);
     }
 
     @Override
     public void deposit(String accountId, BigDecimal amount) {
-        throw new UnsupportedOperationException("Deposit is not implemented yet");
+        amount = BankingRules.amount(amount);
+        BankingRules.existingAccount(accounts, accountId);
+        transactions.deposit(accountId, amount);
+        log.info("Deposit succeeded");
     }
 
     @Override
@@ -39,6 +47,7 @@ public class TransactionServiceImpl implements TransactionService {
         if (sourceAccountId == null || destinationAccountId == null ||
                 sourceAccountId.isBlank() || destinationAccountId.isBlank()) {
             throw new IllegalArgumentException(
+
                     "Account IDs cannot be empty.");
         }
 
@@ -47,7 +56,7 @@ public class TransactionServiceImpl implements TransactionService {
                     "Source and destination accounts must be different.");
         }
 
-        transaction.transfer(
+        transactions.transfer(
                 sourceAccountId,
                 destinationAccountId,
                 amount
@@ -56,7 +65,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> getRecentTransactions(String accountId) {
-        throw new UnsupportedOperationException(
-                "Transaction history is not implemented yet");
+        BankingRules.existingAccount(accounts, accountId);
+        return List.copyOf(transactions.findRecentByAccountId(accountId, 10));
     }
 }
