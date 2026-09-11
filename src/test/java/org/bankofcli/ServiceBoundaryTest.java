@@ -4,9 +4,10 @@ import java.math.BigDecimal;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
+
+import org.bankofcli.exceptions.BankingException;
 import org.bankofcli.repository.*;
 import org.bankofcli.repository.memory.InMemoryBankRepository;
-import org.bankofcli.service.BankingException;
 import org.bankofcli.service.impl.*;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;

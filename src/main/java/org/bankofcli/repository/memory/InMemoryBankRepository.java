@@ -3,9 +3,10 @@ package org.bankofcli.repository.memory;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
+
+import org.bankofcli.exceptions.BankingException;
 import org.bankofcli.model.*;
 import org.bankofcli.repository.*;
-import org.bankofcli.service.BankingException;
 import org.bankofcli.service.impl.BankingRules;
 
 /** Session-only storage. Synchronization makes balance and history changes atomic. */

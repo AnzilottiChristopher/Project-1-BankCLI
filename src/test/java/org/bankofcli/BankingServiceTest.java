@@ -2,8 +2,8 @@ package org.bankofcli;
 
 import java.math.BigDecimal;
 import org.bankofcli.repository.memory.InMemoryBankRepository;
-import org.bankofcli.service.BankingException;
 import org.bankofcli.service.impl.*;
+import org.bankofcli.exceptions.BankingException;
 import org.bankofcli.model.TransactionType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
