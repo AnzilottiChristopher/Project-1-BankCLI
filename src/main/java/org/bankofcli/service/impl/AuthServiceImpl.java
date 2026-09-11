@@ -1,10 +1,11 @@
 package org.bankofcli.service.impl;
 
 import java.util.Objects;
+
+import org.bankofcli.exceptions.BankingException;
 import org.bankofcli.model.Account;
 import org.bankofcli.repository.AccountRepository;
 import org.bankofcli.service.AuthService;
-import org.bankofcli.service.BankingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

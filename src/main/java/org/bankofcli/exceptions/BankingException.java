@@ -1,4 +1,4 @@
-package org.bankofcli.service;
+package org.bankofcli.exceptions;
 
 /** A banking rule violation that can be shown to the user. */
 public class BankingException extends RuntimeException {

@@ -4,9 +4,12 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import org.bankofcli.exceptions.BankingException;
 import org.bankofcli.repository.memory.InMemoryBankRepository;
 import org.bankofcli.service.*;
 import org.bankofcli.service.impl.*;
+import org.bankofcli.utils.SQLiteConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,14 +28,6 @@ public class BankApplication {
         this.transactions = transactions;
         this.scanner = scanner;
         this.out = out;
-    }
-
-    public static void main(String[] args) {
-        InMemoryBankRepository repository = new InMemoryBankRepository();
-        try (Scanner scanner = new Scanner(System.in)) {
-            new BankApplication(new AuthServiceImpl(repository), new AccountServiceImpl(repository),
-                    new TransactionServiceImpl(repository, repository), scanner, System.out).run();
-        }
     }
 
     public void run() {
@@ -155,5 +150,15 @@ public class BankApplication {
             }
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        SQLiteConnectionFactory.initializeDatabase();
+
+        InMemoryBankRepository repository = new InMemoryBankRepository();
+        try (Scanner scanner = new Scanner(System.in)) {
+            new BankApplication(new AuthServiceImpl(repository), new AccountServiceImpl(repository),
+                    new TransactionServiceImpl(repository, repository), scanner, System.out).run();
+        }
     }
 }

@@ -10,7 +10,7 @@ public class SQLiteAccountRepository implements AccountRepository {
 
     @Override
     public Account create(Account account) {
-        // TODO Auto-generated method stub
+        // TODO: Make sure to create a UUID for the Account ID. Otherwise, it won't be accepted into the database.
         throw new UnsupportedOperationException("Unimplemented method 'create'");
     }
 

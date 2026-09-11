@@ -3,10 +3,10 @@ package org.bankofcli.service.impl;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
+
 import org.bankofcli.model.Transaction;
 import org.bankofcli.repository.AccountRepository;
 import org.bankofcli.repository.TransactionRepository;
-import org.bankofcli.service.BankingException;
 import org.bankofcli.service.TransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,7 @@ public class TransactionServiceImpl implements TransactionService {
                     "Source and destination accounts must be different.");
         }
 
-        transactionRepository.transfer(
+        transactions.transfer(
                 sourceAccountId,
                 destinationAccountId,
                 amount

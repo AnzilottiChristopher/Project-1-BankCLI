@@ -50,6 +50,9 @@ local.properties
 # Code Recommenders
 .recommenders/
 
+# Database
+bank.db
+
 # Annotation Processing
 .apt_generated/
 .apt_generated_test/

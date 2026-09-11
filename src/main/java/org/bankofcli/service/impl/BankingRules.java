@@ -2,8 +2,9 @@ package org.bankofcli.service.impl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
+import org.bankofcli.exceptions.BankingException;
 import org.bankofcli.repository.AccountRepository;
-import org.bankofcli.service.BankingException;
 
 public final class BankingRules {
     private BankingRules() {}
